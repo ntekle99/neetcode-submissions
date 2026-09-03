@@ -1,0 +1,17 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        memo = {}
+
+        def dfs(i):
+            if i == 0 or i ==1:
+                return nums[i]
+            if i == -1:
+                return 0
+            if i in memo:
+                return memo[i]
+
+            memo[i] = nums[i] + max(dfs(i-2),dfs(i-3))
+            return memo[i]
+        
+        return max( dfs(len(nums)-1), dfs(len(nums)-2) )
+        
